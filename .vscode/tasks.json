@@ -1,0 +1,49 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "shell",
+			"label": "Build library objs",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-g",
+				"-c",
+				"-Wall",
+				"-Werror",
+				"-fpic",
+				"${workspaceFolder}/*.cpp",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/build"
+			},
+			"problemMatcher": [
+				"$gcc"
+			]
+		},
+		{
+			"type": "shell",
+			"label": "Build library",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-shared",
+				"-o",
+				"libcComms.so",
+				"${workspaceFolder}/build/*.o",
+			],
+			"options": {
+				"cwd": "${workspaceFolder}/build"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"Build library objs"
+			]
+		}
+	]
+}
